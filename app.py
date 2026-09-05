@@ -6,6 +6,7 @@ from openai import OpenAI
 from dotenv import load_dotenv
 
 load_dotenv()
+port = int(os.environ.get("PORT", 7860))
 
 openrouter_client = OpenAI(
     api_key=os.getenv("OPENROUTER_API_KEY"),   # your OpenRouter key
@@ -80,4 +81,4 @@ with gr.Blocks(title="LLM Arena") as demo:
     up_b.click(lambda: vote("👍 Groq"), outputs=verdict)
     down_b.click(lambda: vote("👎 Groq"), outputs=verdict)
 
-demo.launch(share=True)   # → local + public link 🎉
+demo.launch(server_name="0.0.0.0", server_port=port)   # → local + public link 🎉
